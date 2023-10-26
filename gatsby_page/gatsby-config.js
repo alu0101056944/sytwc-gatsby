@@ -8,11 +8,6 @@ module.exports = {
   },
   plugins: [
     "gatsby-plugin-sass",
-    {
-      resolve: "gatsby-plugin-image",
-      options: {
-        
-      }
-    }
-    ]
+    "gatsby-plugin-image"
+  ]
 };

@@ -7,7 +7,7 @@ const IndexPage = () => {
   return (
     <div>
       <h1>Introduction to Gatsby</h1>
-      <StaticImage alt='An image of a logo of gatsby' src="../images/icon.png"></StaticImage>
+      <StaticImage src="../images/icon.png" alt="An image of a logo of gatsby"/>
       <p>Esta es la página principal.</p>
       <p><Link to="/example">An example</Link></p>
       <p><Link to="/about">About</Link></p>
