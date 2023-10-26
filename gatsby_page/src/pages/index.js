@@ -3,6 +3,8 @@ import { Link } from 'gatsby'
 import SomeTemplate from '../templates/sometemplate';
 import { StaticImage } from 'gatsby-plugin-image';
 
+// Probar a ver si puedo utilizar otros plugins
+
 const IndexPage = () => {
   return (
     <div>
