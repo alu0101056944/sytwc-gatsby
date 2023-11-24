@@ -2,27 +2,61 @@
 
 Marcos Barrios, alu0101056944
 
-## Description
+## Tarea 1: Configurar el proyecto Gatsby
 
-<code>Sass</code> learning repository to prepare for an evaluation practice session of the *Sistemas y Tecnología Web: Cliente* subject.
-
-## Project structure
+Se instala gatsby y se utiliza `gatsby new` para comenzar una nueva página web de gatsby con la estructura básica. A continuación se observa la estructura hasta la tarea 3 completada:
 
 ```bash
 .
 ├── README.md
-├── web-server
-└── www
-    ├── assets
-    └── styles             // Exercises description and solution files
-        ├── README.md
-        ├── exercise1.css
-        └── exercise1_solution.scss
-
+├── docs
+└── gatsby_page
+    ├── README.md
+    ├── gatsby-config.js
+    ├── package-lock.json
+    ├── package.json
+    ├── public
+    │   ├── page-data
+    │   │   ├── 404.html
+    │   │   │   └── page-data.json
+    │   │   ├── about
+    │   │   │   └── page-data.json
+    │   │   ├── dev-404-page
+    │   │   │   └── page-data.json
+    │   │   ├── example
+    │   │   │   └── page-data.json
+    │   │   └── index
+    │   │       └── page-data.json
+    │   ├── static
+    │   └── ~partytown
+    │       ├── debug
+    │       │   ├── partytown-atomics.js
+    │       │   ├── partytown-media.js
+    │       │   ├── partytown-sandbox-sw.js
+    │       │   ├── partytown-sw.js
+    │       │   ├── partytown-ww-atomics.js
+    │       │   ├── partytown-ww-sw.js
+    │       │   └── partytown.js
+    │       ├── partytown-atomics.js
+    │       ├── partytown-media.js
+    │       ├── partytown-sw.js
+    │       └── partytown.js
+    └── src
+        ├── images
+        │   └── icon.png
+        ├── pages
+        │   ├── 404.js
+        │   ├── about.js
+        │   ├── example.js
+        │   └── index.js
+        └── templates
+            └── sometemplate.js
 ```
 
-## Annotations
+Solo está presente un repositorio. Se puede observar que solo hay una carpeta .git:
 
-### `@extend` explanation
+![bash ls -la command showing only one repository is present](docs/git_proof.png)
 
-It models a "X also has everything of Y" relationship **relative to the specific selector combination that is using the `@extend` directive. The thing is, the final html may not have the extended class as parent, in which case the original rules will not apply. That's why a separate selector combination is generated for that specific order of selectors, so that the original specifity (less specific, so more cases apply) is kept.
+## Tarea 2: Primeros pasos en Gatsby
+
+
