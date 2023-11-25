@@ -9,6 +9,7 @@ module.exports = {
   plugins: [
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
-    "gatsby-source-filesystem"
+    "gatsby-plugin-sharp",
+    // "gatsby-source-filesystem",
   ]
 };
