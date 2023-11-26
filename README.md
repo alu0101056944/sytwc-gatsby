@@ -57,6 +57,94 @@ Solo está presente un repositorio. Se puede observar que solo hay una carpeta .
 
 ![bash ls -la command showing only one repository is present](docs/git_proof.png)
 
-## Tarea 2: Primeros pasos en Gatsby
+## Tarea 2: Página principal que enlaza a otras dos páginas
 
+Página principal
+
+ - [Enlace a la página principal escrito como componente react gatsby](gatsby_page/src/pages/index.js)
+
+```js
+const IndexPage = () => {
+return (
+  <div>
+    <h1>Introduction to Gatsby</h1>
+    <StaticImage src="../images/icon.png" alt="An image of a logo of gatsby"/>
+    <p>Esta es la página principal.</p>
+    <p><Link to="/example">An example</Link></p>
+    <p><Link to="/about">About</Link></p>
+    <SomeTemplate>
+      <p>This is the content I want to insert into the card main</p>
+    </SomeTemplate>
+  </div>
+)
+}
+```
+
+ - [Enlace a la página de ejemplo escrito como componente react gatsby](gatsby_page/src/pages/example.js)
+
+
+```js
+ const Example = () => {
+  return (
+    <main>
+      <h1>Introduction to Gatsby</h1>
+      <p>Esta es la página example.</p>
+      <SomeTemplate>
+        <p>This is more content for the main part of my card component layout.</p>
+      </SomeTemplate>
+    </main>
+  );
+}
+```
+
+ - [Enlace a la página de "sobre esta página" escrito como componente react gatsby](gatsby_page/src/pages/example.js)
+
+```js
+const About = () => {
+  return (
+    <main>
+      <h1>Introduction to Gatsby</h1>
+      <p>Esta es otra página para cumplir el requerimiento de tener dos páginas enlazadas en otra.</p>
+      <SomeTemplate>
+        <p>This is a third use of the SomeTemplate layout.</p>
+      </SomeTemplate>
+    </main>
+  )
+}
+```
+
+## Tarea 3: Página principal que enlaza a otras dos páginas
+
+El layout utilizado es el siguiente:
+
+```js
+const SomeTemplate = ({children}) => {
+  return (
+    <div>
+      <div>
+        {children}
+      </div>
+      <div>
+        <p>This is the foot of the card</p>
+      </div>
+    </div>
+  );
+}
+```
+
+Se puede observar en [la tarea 2](#tarea-2-página-principal-que-enlaza-a-otras-dos-páginas) que las páginas web contienen la plantilla, utilizándola como `SomeTemplate`.
+
+Este es el resultado final:
+
+### Página principal
+
+![Captura de pantalla de la página principal](docs/main_page.png)
+
+### Página de ejemplo
+
+![Captura de pantalla de la página de ejemplo](docs/example_page.png)
+
+### Página de "sobre esta página"
+
+![Captura de pantalla de la página de "sobre esta página"](docs/about_page.png)
 
