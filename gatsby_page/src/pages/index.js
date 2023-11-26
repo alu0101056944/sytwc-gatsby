@@ -2,10 +2,9 @@ import * as React from 'react';
 import { Link } from 'gatsby'
 import SomeTemplate from '../templates/sometemplate';
 import { StaticImage } from 'gatsby-plugin-image';
+import { graphql } from 'gatsby';
 
-// Probar a ver si puedo utilizar otros plugins
-
-const IndexPage = () => {
+const IndexPage = ({data}) => {
   return (
     <div>
       <h1>Introduction to Gatsby</h1>
@@ -16,9 +15,24 @@ const IndexPage = () => {
       <SomeTemplate>
         <p>This is the content I want to insert into the card main</p>
       </SomeTemplate>
+      {
+        data.allFile.nodes.map((node) => {
+              return <p key={node.name}>{node.name}</p>
+            })
+      }
     </div>
   )
 }
+
+export const query = graphql(`
+query {
+  allFile {
+    nodes {
+      name
+    }
+  }
+}
+`)
 
 export const Head = () => <title>SYTWC práctica de gatsby.</title>
 

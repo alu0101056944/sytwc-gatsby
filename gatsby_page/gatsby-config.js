@@ -10,6 +10,12 @@ module.exports = {
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
-    // "gatsby-source-filesystem",
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'all page components',
+        path: `${__dirname}/pages`
+      }
+    }
   ]
 };
