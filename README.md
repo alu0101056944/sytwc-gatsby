@@ -148,3 +148,22 @@ Este es el resultado final:
 
 ![Captura de pantalla de la página de "sobre esta página"](docs/about_page.png)
 
+## Tarea 4: Usar el componente `StaticImage`
+
+Se instaló `gatsby-plugin-image` y se especificó en `gatsby-config.js` lo siguiente:
+
+```js
+module.exports = {
+  siteMetadata: {
+    title: `SYTWC Gatsby Assignment`,
+    siteUrl: `https://www.yourdomain.tld`
+  },
+  plugins: [
+    "gatsby-plugin-sass",
+    "gatsby-plugin-image",
+    "gatsby-plugin-sharp",
+  ]
+};
+```
+
+Es necesario instalar `gatsby-plugin-sharp` porque es una dependencia de `gatsby-plugin-image`. Se puede ver en las capturas de pantalla de la [tarea 3](#tarea-3-página-principal-que-enlaza-a-otras-dos-páginas) cómo se ve la imagen [Imagen del logo de gatsby](images/icon.png). En la [tarea 2](#tarea-2-página-principal-que-enlaza-a-otras-dos-páginas) están los fragmentos de código donde se ve como se utiliza el componente `StaticImage`.
