@@ -1,17 +1,14 @@
 import * as React from 'react';
 
-import Navigation from './navigation'
-import Content from './content'
-
-const PageBody = ({navigationItems, children}) => {
+const PageBody = ({intoNavigation, children}) => {
   return (
     <>
-      <Navigation>
-        {navigationItems}
-      </Navigation>
-      <Content>
+      <nav>
+        {intoNavigation}
+      </nav>
+      <main>
         {children}
-      </Content>
+      </main>
     </>
   )
 }
