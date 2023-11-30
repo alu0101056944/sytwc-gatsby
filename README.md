@@ -196,7 +196,7 @@ query {
 `
 ```
 
-I se utiliza en el cuerpo del componente:
+Y se utiliza en el cuerpo del componente:
 
 ```js
   // (...)
