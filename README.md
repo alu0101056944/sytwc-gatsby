@@ -170,7 +170,19 @@ Es necesario instalar `gatsby-plugin-sharp` porque es una dependencia de `gatsby
 
 ## Usando GraphQL
 
-Se agrega la siguiente consulta a [gatsby_page/src/pages/index.js](gatsby_page/src/pages/index.js):
+Tras haber instalado el plugin `gatsby-source-filesystem`, se configura en gatsby.config.js:
+
+```js
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'all page components',
+        path: `${__dirname}/src/pages`
+      }
+    }
+```
+
+Luego se agrega la siguiente consulta a [gatsby_page/src/pages/index.js](gatsby_page/src/pages/index.js):
 
 ```js
 export const query = graphql`
