@@ -3,7 +3,7 @@ import * as React from 'react';
 import Navigation from './navigation'
 import Content from './content'
 
-const PageBody = ({children}) => {
+const PageBody = ({navigationItems, children}) => {
   return (
     <>
       <Navigation></Navigation>
