@@ -1,18 +1,22 @@
 import * as React from 'react';
-import SomeTemplate from '../templates/sometemplate';
+import PageBody from '../templates/pagebody';
 
 const About = () => {
   return (
     <main>
       <h1>Introduction to Gatsby</h1>
-      <p>Esta es otra página para cumplir el requerimiento de tener dos páginas enlazadas en otra.</p>
-      <SomeTemplate>
+      <p>En la asignatura de <em>Sistemas y Tecnologías Web: Cliente</em> se aprenden conceptos
+      relacionados con tecnologías web utilizadas en empresas del mercado laboral. Es importante
+      conocerlas porque este último está sometido a restricciones a los que un entorno académico
+      no está sujeto, y una persona que quiera ser productiva debe de conocer las herramientas
+      que se pueden utilizar para resolver cualquier problema que pueda suceder.</p>
+      <PageBody>
         <p>This is a third use of the SomeTemplate layout.</p>
-      </SomeTemplate>
+      </PageBody>
     </main>
   )
 }
 
-export const Head = () => <title>SYTWC práctica de gatsby; sobre main</title>
+export const Head = () => <title>Sobre esta página</title>
 
-export default About;
+export default About

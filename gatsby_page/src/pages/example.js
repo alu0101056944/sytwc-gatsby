@@ -1,18 +1,18 @@
 import * as React from 'react';
-import SomeTemplate from '../templates/sometemplate';
+import PageBody from '../templates/pagebody';
 
 const Example = () => {
   return (
     <main>
       <h1>Introduction to Gatsby</h1>
       <p>Esta es la página example.</p>
-      <SomeTemplate>
+      <PageBody>
         <p>This is more content for the main part of my card component layout.</p>
-      </SomeTemplate>
+      </PageBody>
     </main>
   );
 }
 
-export const Head = () => <title>SYTWC práctica de gatsby; ejemplo</title>
+export const Head = () => <title>Página de ejemplo</title>
 
 export default Example;
