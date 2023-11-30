@@ -4,7 +4,7 @@ import SomeTemplate from '../templates/sometemplate';
 import { StaticImage } from 'gatsby-plugin-image';
 import { graphql } from 'gatsby';
 
-const IndexPage = ({data}) => {
+const IndexPage = ({data}) => { 
   return (
     <div>
       <h1>Introduction to Gatsby</h1>
@@ -24,7 +24,7 @@ const IndexPage = ({data}) => {
   )
 }
 
-export const query = graphql(`
+export const query = graphql`
 query {
   allFile {
     nodes {
@@ -32,7 +32,7 @@ query {
     }
   }
 }
-`)
+`
 
 export const Head = () => <title>SYTWC práctica de gatsby.</title>
 
