@@ -167,3 +167,35 @@ module.exports = {
 ```
 
 Es necesario instalar `gatsby-plugin-sharp` porque es una dependencia de `gatsby-plugin-image`. Se puede ver en las capturas de pantalla de la [tarea 3](#tarea-3-página-principal-que-enlaza-a-otras-dos-páginas) cómo se ve la imagen [Imagen del logo de gatsby](images/icon.png). En la [tarea 2](#tarea-2-página-principal-que-enlaza-a-otras-dos-páginas) están los fragmentos de código donde se ve como se utiliza el componente `StaticImage`.
+
+## Usando GraphQL
+
+Se agrega la siguiente consulta a [gatsby_page/src/pages/index.js](gatsby_page/src/pages/index.js):
+
+```js
+export const query = graphql`
+query {
+  allFile {
+    nodes {
+      name
+    }
+  }
+}
+`
+```
+
+I se utiliza en el cuerpo del componente:
+
+```js
+  // (...)
+  {
+    data.allFile.nodes.map((node) => {
+          return <p key={node.name}>{node.name}</p>
+        })
+  }
+  // (...)
+```
+
+El resultado es:
+
+![index.html webpage with the graphql query to get the webpage list](docs/graphql-result.png)
