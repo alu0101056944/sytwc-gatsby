@@ -4,8 +4,8 @@ const Content = ({children}) => {
   return (
     <main>
       {
-        React.children.map(children, domNode => {
-          if (domNode.classList.includes('mainItem')) {
+        React.Children.map(children, domNode => {
+          if (domNode.classList.contains('mainItem')) {
             return domNode;
           } else {
             return null;

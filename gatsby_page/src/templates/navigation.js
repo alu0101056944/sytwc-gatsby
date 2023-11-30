@@ -4,8 +4,8 @@ const Navigation = ({children}) => {
   return (
     <nav>
       {
-        React.children.map(children, domNode => {
-          if (domNode.classList.includes('navigationItem')) {
+        React.Children.map(children, domNode => {
+          if (domNode.classList.contains('navigationItem')) {
             return domNode;
           } else {
             return null;

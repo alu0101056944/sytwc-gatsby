@@ -6,7 +6,9 @@ import Content from './content'
 const PageBody = ({navigationItems, children}) => {
   return (
     <>
-      <Navigation></Navigation>
+      <Navigation>
+        {navigationItems}
+      </Navigation>
       <Content>
         {children}
       </Content>

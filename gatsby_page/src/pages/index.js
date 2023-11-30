@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import PageBody from '../templates/pagebody';
 import { StaticImage } from 'gatsby-plugin-image';
 
-const IndexPage = () => { 
+const IndexPage = () => {
   return (
     <div>
       <h1>Introduction to Gatsby</h1>
