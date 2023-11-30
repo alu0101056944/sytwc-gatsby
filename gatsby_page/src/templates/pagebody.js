@@ -1,30 +1,15 @@
 import * as React from 'react';
 
+import Navigation from './navigation'
+import Content from './content'
+
 const PageBody = ({children}) => {
   return (
     <>
-      <nav>
-        {
-          children.map(domNode => {
-            if (domNode.classList.includes('navigationItem')) {
-              return domNode;
-            } else {
-              return null;
-            }
-          })
-        }
-      </nav>
-      <main>
-        {
-          children.map(domNode => {
-            if (domNode.classList.includes('mainItem')) {
-              return domNode;
-            } else {
-              return null;
-            }
-          })
-        }
-      </main>
+      <Navigation></Navigation>
+      <Content>
+        {children}
+      </Content>
     </>
   )
 }
