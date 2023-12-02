@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-const PageBody = ({intoNavigation, children}) => {
+const PageBody = ({navigationMenus, children}) => {
   return (
     <>
       <nav>
-        {intoNavigation}
+        {navigationMenus}
       </nav>
       <main>
         {children}

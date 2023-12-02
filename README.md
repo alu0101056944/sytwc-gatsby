@@ -2,7 +2,14 @@
 
 Marcos Barrios, alu0101056944
 
-## Tarea 1: Configurar el proyecto Gatsby
+## Índice
+  
+  - [Tareas](#tareas)
+  - [Haciendo un Layout con encabezado y zona principal](#tareas)
+
+## Tareas
+
+### Tarea 1: Configurar el proyecto Gatsby
 
 Se instala gatsby y se utiliza `gatsby new` para comenzar una nueva página web de gatsby con la estructura básica. A continuación se observa la estructura hasta la tarea 3 completada:
 
@@ -57,7 +64,7 @@ Solo está presente un repositorio. Se puede observar que solo hay una carpeta .
 
 ![bash ls -la command showing only one repository is present](docs/git_proof.png)
 
-## Tarea 2: Página principal que enlaza a otras dos páginas
+### Tarea 2: Página principal que enlaza a otras dos páginas
 
 Página principal
 
@@ -113,7 +120,7 @@ const About = () => {
 }
 ```
 
-## Tarea 3: Página principal que enlaza a otras dos páginas
+### Tarea 3: Página principal que enlaza a otras dos páginas
 
 El layout utilizado es el siguiente:
 
@@ -148,7 +155,7 @@ Este es el resultado final:
 
 ![Captura de pantalla de la página de "sobre esta página"](docs/about_page.png)
 
-## Tarea 4: Usar el componente `StaticImage`
+### Tarea 4: Usar el componente `StaticImage`
 
 Se instaló `gatsby-plugin-image` y se especificó en `gatsby-config.js` lo siguiente:
 
@@ -211,3 +218,9 @@ Y se utiliza en el cuerpo del componente:
 El resultado es:
 
 ![index.html webpage with the graphql query to get the webpage list](docs/graphql-result.png)
+
+## Haciendo un Layout con encabezado y zona principal
+
+Se instala `node-sass` y el plugin `gatsby-plugin-sass`. Se configura el plugin `gatsby-config.js`.
+
+
