@@ -223,4 +223,127 @@ El resultado es:
 
 Se instala `node-sass` y el plugin `gatsby-plugin-sass`. Se configura el plugin `gatsby-config.js`.
 
+Se define el template siguiente:
+
+```js
+const PageBody = ({navigationMenus, children}) => {
+  return (
+    <>
+      <nav>
+        {navigationMenus}
+      </nav>
+      <main>
+        {children}
+      </main>
+    </>
+  )
+}
+```
+
+Que incluye una etiqueta html `nav` y otra `main`. Para permitir tener más de un menú, recibe un prop `navigationMenus`.
+
+Luego se define otro template que use `PageBody` pero que pase por props información para el menú de navegación:
+
+```js
+const PageBodyAdvanced = ({children}) => {
+  return (
+      <PageBody 
+        navigationMenus={
+            [
+              <NavigationMenuWithLogo
+                logoImage={<StaticImage src="../images/icon.png" alt="The logo of the webpage"/>}
+                links={
+                  [
+                    { to: '/', text: 'Página principal' },
+                    { to: '/about', text: 'Sobre esta página' },
+                    { to: '/example', text: 'Página de ejemplo' }
+                  ]
+                }
+              />
+            ]
+          }>
+
+        {children}
+      </PageBody>
+  )
+}
+```
+
+El template `PageBodyAdvanced` pasa por el prop `links` al template propio `NavigationMenuWithLogo` información para crear enlaces hacia las páginas `/`, `/about` y `/example`, además de un logo que utiliza `StaticImage` del plugin `gatsby-plugin-image` por el prop `logoImage`.
+
+La definición del template `NavigationWithMenuLogo` es la siguiente:
+
+```js
+const NavigationMenuWithLogo = ({logoImage, links}) => {
+  // **Aquí se comprueba que el tipo del prop links es adecuado**
+
+  return (
+    <div class="navigationFlexboxLayout">
+      <div class="logoDiv">
+        {logoImage}
+      </div>
+      {
+        links.map((linkInfo, index) => (
+              <Link className="simpleLink" key={index} to={linkInfo.to}>{linkInfo.text}</Link>
+            ))
+      }
+    </div>
+  );
+}
+```
+
+Una vez creados esos templates `PageBody`, `PageBodyAdvanced`, `NavigationMenuWithLogo` se defined las tres páginas:
+
+### `pages/index.js`
+
+```js
+const IndexPage = () => {
+  return (
+    <div>
+      <PageBodyAdvanced>
+        <p>El contenido de la plantilla de contenido se puede observar aquí.</p>
+      </PageBodyAdvanced>
+    </div>
+  )
+}
+```
+
+### `pages/example.js`
+
+```js
+const Example = () => {
+  return (
+    <PageBodyAdvanced>
+      <p>Example webpage.</p>
+    </PageBodyAdvanced>
+  );
+}
+```
+
+### `pages/about.js`
+
+```js
+const About = () => {
+  return (
+    <PageBodyAdvanced>
+      <p>Marcos Jesús Barrios Lorenzo</p>
+      <p>Creado el 03/12/2023</p>
+      <StaticImage src="../images/author-picture.jpg" alt="Author image taken from it's github account"/>
+      <p>En la asignatura de <em>Sistemas y Tecnologías Web: Cliente</em> se aprenden conceptos
+      relacionados con tecnologías web utilizadas en empresas del mercado laboral. Es importante
+      conocerlas porque este último está sometido a restricciones a los que un entorno académico
+      no está sujeto, y una persona que quiera ser productiva debe de conocer las herramientas
+      que se pueden utilizar para resolver cualquier problema que pueda suceder.</p>
+    </PageBodyAdvanced>
+  )
+}
+```
+
+Se puede observar como se ha incluido la información en `About` especificada en el enunciado de la práctica.
+
+### Estilos scss
+
+Se hace un `import from '../styles/<archivo>.scss'` en el archivo de cada componente template, de forma que se incluyen globalmente los estilos necesarios para la página web. Ver [./gatsby_page/src/styles](./gatsby_page/src/styles).
+
+
 
