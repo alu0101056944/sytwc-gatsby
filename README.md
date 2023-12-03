@@ -343,7 +343,70 @@ Se puede observar como se ha incluido la información en `About` especificada en
 
 ### Estilos scss
 
-Se hace un `import from '../styles/<archivo>.scss'` en el archivo de cada componente template, de forma que se incluyen globalmente los estilos necesarios para la página web. Ver [./gatsby_page/src/styles](./gatsby_page/src/styles).
+Se hace un `import from '../styles/<archivo>.scss'` en el archivo de cada componente template, de forma que se incluyen globalmente los estilos necesarios para la página web.
 
+#### `styles/navigation-menu-with-logo.scss`
+
+```css
+@import './simple-navigation-menu.scss';
+
+.navigationFlexboxLayout {
+  display: flex;
+  align-items: flex-end;
+
+  %allItems {
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+  }
+
+  .logoDiv {
+    @extend %allItems;
+    width: 100px;
+    height: 100px;
+    margin-right: 25px;
+  }
+}
+
+```
+
+Se utiliza el scss de `./simple-navigation-menu.scss` porque previamente se utilizaba un template `SimpleNavigationMenu` en vez del template `NavigationMenuWithLogo` y se quizo reutilizar sus contenido.
+
+Contenido de `./simple-navigation-menu.scss`:
+
+```css
+.simpleLink {
+  background-color: lightblue;
+  margin: 5px 5px 5px 5px;
+  padding: 0px 5px 0px 5px;
+}
+```
+
+#### `styles/pagebody.scss`
+
+```css
+@mixin setMarginAndPadding {
+  margin: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+}
+
+main {
+  background-color: lightcyan;
+  @include setMarginAndPadding;
+}
+
+body {
+  margin: auto;
+  width: 1000px;
+}
+
+nav {
+  background-color: lightgray;
+  @include setMarginAndPadding;
+}
+```
+
+### Resultado final:
+
+![page screenshot after body nav creation](./docs/page-screenshot-after-body-nav-creation.png)
 
 
