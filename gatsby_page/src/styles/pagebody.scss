@@ -18,9 +18,3 @@ nav {
   background-color: lightgray;
   @include setMarginAndPadding;
 }
-
-.logoDiv {
-  @include setMarginAndPadding;
-  width: 100px;
-  height: 100px;
-}

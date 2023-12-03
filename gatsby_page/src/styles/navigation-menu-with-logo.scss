@@ -1,0 +1,19 @@
+
+@import './simple-navigation-menu.scss';
+
+.navigationFlexboxLayout {
+  display: flex;
+  align-items: flex-end;
+
+  %allItems {
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+  }
+
+  .logoDiv {
+    @extend %allItems;
+    width: 100px;
+    height: 100px;
+    margin-right: 25px;
+  }
+}

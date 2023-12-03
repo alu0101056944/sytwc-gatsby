@@ -1,12 +1,9 @@
 import * as React from 'react';
 import '../styles/pagebody.scss'
 
-const PageBody = ({logoImage, navigationMenus, children}) => {
+const PageBody = ({navigationMenus, children}) => {
   return (
     <>
-      <div class='logoDiv'>
-        {logoImage}
-      </div>
       <nav>
         {navigationMenus}
       </nav>
