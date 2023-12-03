@@ -5,7 +5,7 @@ Marcos Barrios, alu0101056944
 ## Índice
   
   - [Tareas](#tareas)
-  - [Haciendo un Layout con encabezado y zona principal](#tareas)
+  - [Haciendo un Layout con encabezado y zona principal](#haciendo-un-layout-con-encabezado-y-zona-principal)
 
 ## Tareas
 
