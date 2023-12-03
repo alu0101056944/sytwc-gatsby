@@ -1,0 +1,26 @@
+
+@mixin setMarginAndPadding {
+  margin: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+}
+
+main {
+  background-color: lightcyan;
+  @include setMarginAndPadding;
+}
+
+body {
+  margin: auto;
+  width: 1000px;
+}
+
+nav {
+  background-color: lightgray;
+  @include setMarginAndPadding;
+}
+
+.logoDiv {
+  @include setMarginAndPadding;
+  width: 100px;
+  height: 100px;
+}

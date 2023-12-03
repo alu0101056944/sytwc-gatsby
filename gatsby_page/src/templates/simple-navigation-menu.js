@@ -1,6 +1,6 @@
 import * as React from 'react';
-import '../styles/simple-navigation-menu.scss';
 import { Link } from 'gatsby';
+import '../styles/simple-navigation-menu.scss';
 
 const SimpleNavigationMenu = ({links}) => {
   if (!links) {
@@ -17,7 +17,7 @@ const SimpleNavigationMenu = ({links}) => {
     <>
       {
         links.map((linkInfo, index) => (
-              <Link key={index} to={linkInfo.to}>{linkInfo.text}</Link>
+              <Link className="simpleLink" key={index} to={linkInfo.to}>{linkInfo.text}</Link>
             ))
       }
     </>
