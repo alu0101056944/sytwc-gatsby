@@ -14,8 +14,8 @@ const NavigationMenuWithLogo = ({logoImage, links}) => {
   }
 
   return (
-    <div class="navigationFlexboxLayout">
-      <div class="logoDiv">
+    <div className="navigationFlexboxLayout">
+      <div className="logoDiv">
         {logoImage}
       </div>
       {

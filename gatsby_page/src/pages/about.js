@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PageBody from '../templates/pagebody';
 import PageBodyAdvanced from '../templates/pagebody-advanced';
 import { StaticImage } from 'gatsby-plugin-image';
 
