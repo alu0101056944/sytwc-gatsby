@@ -1,0 +1,15 @@
+
+.placeholder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background-color: IndianRed;
+  width: 120px;
+  height: 160px;
+  margin: 8px 8px 8px 8px;
+  padding: 5px 5px 5px 5px;
+  overflow: hidden;
+  border: 1px solid dimgray;
+  border-radius: 10px;
+  overflow: scroll;
+}
