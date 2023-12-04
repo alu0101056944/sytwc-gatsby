@@ -6,6 +6,7 @@ Marcos Barrios, alu0101056944
   
   - [Tareas](#tareas)
   - [Haciendo un Layout con encabezado y zona principal](#haciendo-un-layout-con-encabezado-y-zona-principal)
+  - [Creación del componente edificio](#creacion-del-componente-edificio)
 
 ## Tareas
 
@@ -408,5 +409,7 @@ nav {
 ### Resultado final:
 
 ![page screenshot after body nav creation](./docs/page-screenshot-after-body-nav-creation.png)
+
+### Creación del componente edificio
 
 
