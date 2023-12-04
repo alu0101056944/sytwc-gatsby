@@ -412,4 +412,82 @@ nav {
 
 ### Creación del componente edificio
 
+Se crean tres componentes `Card`, `Placeholder` y `Building`. El primero tiene un cuerpo y un pie en el que se espera que se introduzca cualquier contenido. En el segundo se espera que siga la mecánica de traspasar su contenido de un placeholder a otro. El último es un simple contenedor de placeholders y es el que se encargará de traspasar el contenido de un placeholder a otro.
 
+```js
+const IndexPage = () => {
+  return (
+    <>
+      <PageBodyAdvanced>
+        <Building>
+          <Placeholder>
+            <Card></Card>
+          </Placeholder>
+
+          <Placeholder>
+            <Card></Card>
+          </Placeholder>
+
+          <Placeholder>
+            <Card></Card>
+          </Placeholder>
+
+          <Placeholder>
+            <Card></Card>
+          </Placeholder>
+
+          <Placeholder>
+            <Card></Card>
+          </Placeholder>
+
+          <Placeholder>
+            <Card></Card>
+          </Placeholder>
+        </Building>
+      </PageBodyAdvanced>
+    </>
+  )
+}
+```
+
+Con
+
+```js
+const Card = ({footContent, children}) => {
+  return (
+    <>
+      <div className="card">
+        <div className="card-main">
+          {children}
+        </div>
+
+        <div className="card-foot">
+          {footContent}
+        </div>
+      </div>
+    </>
+  )
+}
+```
+
+```js
+const Placeholder = ({children}) => {
+  return (
+    <div className="placeholder">
+      {children}
+    </div>
+  )
+}
+```
+
+```js
+const Building = ({children}) => {
+  return (
+    <div className="placeholders">
+      {children}
+    </div>
+  )
+}
+```
+
+Se asignó el mismo `scss` que en la práctica anterior.
