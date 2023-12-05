@@ -9,6 +9,7 @@ const PageBodyAdvanced = ({children}) => {
         navigationMenus={
             [
               <NavigationMenuWithLogo
+                key={`navigation1`}
                 logoImage={<StaticImage src="../images/icon.png" alt="The logo of the webpage"/>}
                 links={
                   [

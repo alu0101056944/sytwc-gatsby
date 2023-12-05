@@ -17,4 +17,4 @@ const Card = ({footContent, children}) => {
   )
 }
 
-export default Card;
+export default Card

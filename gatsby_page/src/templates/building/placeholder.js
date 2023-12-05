@@ -9,4 +9,4 @@ const Placeholder = ({children}) => {
   )
 }
 
-export default Placeholder;
+export default Placeholder
