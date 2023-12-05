@@ -22,13 +22,10 @@ const Building = ({amountOfPlaceholders = 0, children}) => {
 
   React.useEffect(() => {
         goods.bienes.forEach(bien => {
-              allPlaceholderContent.push(createCardFromGood(bien))
+              allPlaceholderContent.push(createCardFromGood(bien));
             });
-      }, []); // empty array means only run this once per component mount
-
-  React.useEffect(() => {
         allPlaceholderContent.concat(React.Children.toArray(children));
-      }, []);
+      }, []); // empty array means only run this once per component mount
 
   return (
     <div className="placeholders">
