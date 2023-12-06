@@ -3,8 +3,8 @@ import '../styles/user-score.scss';
 
 // arrayElementWrapper and onScorePress are used to allow the parent
 // to sort any component that has this component.
-const UserScore = (arrayElementWrapper = { count: 0 },
-      onScorePress = () => {}) => {
+const UserScore = ({arrayElementWrapper = { count: 0 },
+      onScorePress = () => {}}) => {
   const [score, setScore] = React.useState(0);
   const likeButton = React.useRef(null);
   const dislikeButton = React.useRef(null);

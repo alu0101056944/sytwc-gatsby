@@ -7,13 +7,13 @@ import { StaticImage } from 'gatsby-plugin-image';
 import goods from '../../../content/bienes.json';
 
 const Building = ({amountOfPlaceholders = 0, children}) => {
-  const [allPlaceholderInfo, setPlaceholderInfo] = React.useState([]);
+  const [allPlaceholderInfo, setAllPlaceholderInfo] = React.useState([]);
 
   // meant for allowing content to implement a score. Content receives this as
   // a prop.
   const notifyScoreChange = (newScore, arrayElementWrapper) => {
     arrayElementWrapper.count = newScore;
-    setPlaceholderInfo(allPlaceholderInfo.sort((a, b) => a.count - b.count));
+    setAllPlaceholderInfo(allPlaceholderInfo.sort((a, b) => a.count - b.count));
   }
 
   const createCardFromGood = (good, indexForKey, arrayElementWrapper) => (
@@ -33,7 +33,7 @@ const Building = ({amountOfPlaceholders = 0, children}) => {
       )
 
   React.useEffect(() => {
-        setPlaceholderInfo([
+        setAllPlaceholderInfo([
               ...goods.bienes
                   .map((bien, index) => {
                     const elementWrapper = {
@@ -52,11 +52,11 @@ const Building = ({amountOfPlaceholders = 0, children}) => {
     <div className="placeholders">
       {
        allPlaceholderInfo
-            .reduce((allPlaceholder, content) => {
+            .reduce((allPlaceholder, info) => {
                   if (allPlaceholder.length < amountOfPlaceholders) {
                     const KEY = `placeholder-${allPlaceholder.length}`;
                     allPlaceholder.push((
-                          <Placeholder key={KEY}>{content}</Placeholder>
+                          <Placeholder key={KEY}>{info.element}</Placeholder>
                         ));
                   }
                   return allPlaceholder;
