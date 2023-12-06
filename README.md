@@ -491,3 +491,71 @@ const Building = ({children}) => {
 ```
 
 Se asignó el mismo `scss` que en la práctica anterior.
+
+## Modificación de `Building` hacia separación de contenido y placeholders
+
+Dados N placeholders y un array de M contenidos de placeholder, se introducen en un placeholder los N primeros elementos del array de contenidos. En otras palabras; hay un orden de inserción a placeholders desde el array de contenido.
+
+Puedo introducir como hijos de `Building` contenido para placeholders:
+
+```js
+  <Building amountOfPlaceholders={5}>
+    <Card><p>some card</p></Card>
+  </Building>
+```
+
+Primero se meten internamente cartas para cada bien, luego se introducen los hijos de `Building`. Las cartas de bien tienen prioridad sobre los hijos porque se introducen primero en el array interno de contenido del componente `Building`.
+
+```js
+  return (
+    <div className="placeholders">
+      {
+       allPlaceholderContent
+            .reduce((allPlaceholder, content) => {
+                  if (allPlaceholder.length < amountOfPlaceholders) {
+                    const KEY = `placeholder-${allPlaceholder.length}`;
+                    allPlaceholder.push((
+                          <Placeholder key={KEY}>{content}</Placeholder>
+                        ));
+                  }
+                  return allPlaceholder;
+                }, [])
+      }
+    </div>
+  )
+```
+
+Aplica un `reduce` sobre el array de contenido para acumular un array de placeholders. Introduzco un `Placeholder` mientras no haya llegado a `amountOfPlaceholders`.
+
+Necesito que el array de contenido sea persistente por lo que uso un `useState()` para crear una variable de componente. Luego uso `useEffect` para inicializar ese array. `goods` es un json importado, `import goods from '../../../content/bienes.json';`.
+
+```js
+const Building = ({amountOfPlaceholders = 0, children}) => {
+  const [allPlaceholderContent, setPlaceholderContent] = React.useState([]);
+
+  React.useEffect(() => {
+        const withExtraContent = [
+              ...goods.bienes.map(bien => createCardFromGood(bien)),
+              ...React.Children.toArray(children)
+            ];
+        setPlaceholderContent(withExtraContent);
+      }, [children]); // empty array means only run this once per component mount
+
+  return (
+    // (...)
+```
+
+La función `createCardFromGood` devuelve un elemento JSX que representa la tarjeta:
+
+```js
+const createCardFromGood = (good) => (
+  <Card>
+    <StaticImage src={good.img} alt={"Foto del bien cultural."}/>
+    <h2>{good.nombre}</h2>
+    <p>{good.antecedentes}</p>
+    <p>Tipo: {good.tipo.arquitectura}</p>
+    <p>Época: {good.tipo.época}</p>
+    <p>Localización: {`lat ${good.localizacion.lat}, long: ${good.localizacion.long}`}</p>
+  </Card>
+)
+```
