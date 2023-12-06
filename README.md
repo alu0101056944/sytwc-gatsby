@@ -7,6 +7,7 @@ Marcos Barrios, alu0101056944
   - [Tareas](#tareas)
   - [Haciendo un Layout con encabezado y zona principal](#haciendo-un-layout-con-encabezado-y-zona-principal)
   - [Creación del componente edificio](#creacion-del-componente-edificio)
+  - [Modificación de `Building` hacia separación de contenido y placeholders](#modificación-de-building-hacia-separación-de-contenido-y-placeholders)
 
 ## Tareas
 
@@ -504,7 +505,9 @@ Puedo introducir como hijos de `Building` contenido para placeholders:
   </Building>
 ```
 
-Primero se meten internamente cartas para cada bien, luego se introducen los hijos de `Building`. Las cartas de bien tienen prioridad sobre los hijos porque se introducen primero en el array interno de contenido del componente `Building`.
+Sin embargo, primero se meten internamente cartas para cada bien, luego se introducen los hijos de `Building`. Es decir, las cartas de bien tienen prioridad sobre los hijos pasados a `Building` porque se introducen primero en el array interno de contenido.
+
+El código JSX del componente es el siguiente:
 
 ```js
   return (
@@ -559,3 +562,60 @@ const createCardFromGood = (good) => (
   </Card>
 )
 ```
+
+## Creación de un componente `UserScore`
+
+Con un texto `<span>` y dos botones de like y dislike se crea una variable `score` con `useState` que es modificada por eventos `onClick` del botón:
+
+```js
+const UserScore = () => {
+  const [score, setScore] = React.useState(0);
+  const likeButton = React.useRef(null);
+  const dislikeButton = React.useRef(null);
+  const scoreSpan = React.useRef(null);
+
+  // Lógica para activar, desactivar el botón y para actualizar el texto del
+  // elemento html <span>. Se ejecuta cada vez que se modifica score.
+  React.useEffect(() => {
+    if (score < 1) {
+      //<ref>.current accede al contenido actual al que se refiere la referencia.
+      dislikeButton.current.disabled = true; 
+    } else {
+      dislikeButton.current.disabled = false;
+    }
+
+    scoreSpan.current.textContent = `${score}`;
+  }, [score]);
+
+  const increaseScore = () => {
+    setScore(score + 1);
+  }
+  
+  const decreaseScore = () => {
+    if (score >= 1) {
+      setScore(score - 1);
+    }
+  }
+
+  return (
+    <>
+      <span ref={scoreSpan}>0</span>
+      <button ref={likeButton} onClick={increaseScore}>Like</button>
+      <button ref={dislikeButton} onClick={decreaseScore}>Dislike</button>
+    </>
+  )
+}
+```
+
+Se introdujo temporalmente en `Building` como hijo, dentro de un `Card`, para probarlo:
+
+```js
+    <Building amountOfPlaceholders={5}>
+      <Card><p>some card</p></Card>
+      <Card footContent={<UserScore></UserScore>}></Card>
+    </Building>
+```
+
+![Estado actual de la página web](docs/after-userscore-state.png)
+
+
