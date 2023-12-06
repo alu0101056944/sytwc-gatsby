@@ -8,11 +8,7 @@ const IndexPage = () => {
     <>
       <PageBodyAdvanced>
         <Building amountOfPlaceholders={5}>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
+          <Card><p>some card</p></Card>
         </Building>
       </PageBodyAdvanced>
     </>

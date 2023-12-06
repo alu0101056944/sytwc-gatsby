@@ -18,14 +18,15 @@ const createCardFromGood = (good) => (
 )
 
 const Building = ({amountOfPlaceholders = 0, children}) => {
-  const [allPlaceholderContent] = React.useState([]);
+  const [allPlaceholderContent, setPlaceholderContent] = React.useState([]);
 
   React.useEffect(() => {
-        goods.bienes.forEach(bien => {
-              allPlaceholderContent.push(createCardFromGood(bien));
-            });
-        allPlaceholderContent.concat(React.Children.toArray(children));
-      }, []); // empty array means only run this once per component mount
+        const withExtraContent = [
+              ...goods.bienes.map(bien => createCardFromGood(bien)),
+              ...React.Children.toArray(children)
+            ];
+        setPlaceholderContent(withExtraContent);
+      }, [children]); // empty array means only run this once per component mount
 
   return (
     <div className="placeholders">
