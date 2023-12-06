@@ -13,11 +13,14 @@ const Building = ({amountOfPlaceholders = 0, children}) => {
   // a prop.
   const notifyScoreChange = (newScore, arrayElementWrapper) => {
     arrayElementWrapper.count = newScore;
-    setAllPlaceholderInfo(allPlaceholderInfo.sort((a, b) => a.count - b.count));
+    setAllPlaceholderInfo(oldValue => {
+          console.log(oldValue.sort((a, b) => b.count - a.count));
+          return oldValue.sort((a, b) => b.count - a.count);
+        });
   }
 
-  const createCardFromGood = (good, indexForKey, arrayElementWrapper) => (
-        <CardWithScore key={`cardgood${indexForKey}`}
+  const createCardFromGood = (good, arrayElementWrapper) => (
+        <CardWithScore
             onScorePress={notifyScoreChange}
             arrayElementWrapper={arrayElementWrapper}>
           <StaticImage src={good.img} alt={"Foto del bien cultural."}/>
@@ -35,18 +38,18 @@ const Building = ({amountOfPlaceholders = 0, children}) => {
   React.useEffect(() => {
         setAllPlaceholderInfo([
               ...goods.bienes
-                  .map((bien, index) => {
+                  .map((bien) => {
                     const elementWrapper = {
                       count: 0,
                     }
                     elementWrapper.element =
-                        createCardFromGood(bien, index, elementWrapper);
+                        createCardFromGood(bien, elementWrapper);
                     return elementWrapper;
                   }),
               ...React.Children.toArray(children)
-                  .map(child => ({ element: child, count: 0 }))
+                  .map(child => ({ count: 0, element: child }))
             ]);
-      }, [children]);
+      }, []);
 
   return (
     <div className="placeholders">
