@@ -1,7 +1,10 @@
 import * as React from 'react';
 import '../styles/user-score.scss';
 
-const UserScore = () => {
+// arrayElementWrapper and onScorePress are used to allow the parent
+// to sort any component that has this component.
+const UserScore = (arrayElementWrapper = { count: 0 },
+      onScorePress = () => {}) => {
   const [score, setScore] = React.useState(0);
   const likeButton = React.useRef(null);
   const dislikeButton = React.useRef(null);
@@ -18,12 +21,16 @@ const UserScore = () => {
   }, [score]);
 
   const increaseScore = () => {
-    setScore(score + 1);
+    const NEW_SCORE = score + 1;
+    setScore(NEW_SCORE);
+    onScorePress(NEW_SCORE, arrayElementWrapper);
   }
   
   const decreaseScore = () => {
     if (score >= 1) {
-      setScore(score - 1);
+      const NEW_SCORE = score - 1;
+      setScore(NEW_SCORE);
+      onScorePress(NEW_SCORE, arrayElementWrapper);
     }
   }
 
