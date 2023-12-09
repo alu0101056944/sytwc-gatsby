@@ -2,7 +2,6 @@ import * as React from 'react';
 import '../../styles/building/building.scss';
 import Placeholder from './placeholder';
 import CardWithScore from './card-with-score';
-import { StaticImage } from 'gatsby-plugin-image';
 
 import goods from '../../../content/bienes.json';
 
@@ -12,11 +11,9 @@ const Building = ({amountOfPlaceholders = 0}) => {
   const [allContent, setAllContent] =
       React.useState(
           goods.bienes
-              .map((bien, index) => {
+              .map((bien) => {
                   return (
                       <>
-                        <StaticImage src={`../images/bien${index + 1}.png`}
-                                  alt={"Foto del bien cultural."}/>
                         <h5>{bien.nombre}</h5>
                         <p>{bien.antecedentes}</p>
                         <p>Tipo: {bien.tipo.arquitectura}</p>
@@ -46,9 +43,6 @@ const Building = ({amountOfPlaceholders = 0}) => {
                           });
                   const allSorted =
                       [...allCombined.sort((a, b) => b.score - a.score)];
-                  console.log('sorted');
-                  console.log([...allSorted.map(_ => _.score)]);
-                  console.log([...allSorted.map(_ => _.element)]);
                   setAllContent([...allSorted.map(_ => _.element)]);
                   setAllScore([...allSorted.map(_ => _.score)]);
                 }

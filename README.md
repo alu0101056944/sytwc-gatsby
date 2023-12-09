@@ -413,45 +413,9 @@ nav {
 
 ### Creación del componente edificio
 
-Se crean tres componentes `Card`, `Placeholder` y `Building`. El primero tiene un cuerpo y un pie en el que se espera que se introduzca cualquier contenido. En el segundo se espera que siga la mecánica de traspasar su contenido de un placeholder a otro. El último es un simple contenedor de placeholders y es el que se encargará de traspasar el contenido de un placeholder a otro.
+Se crean seis componentes `Card`, `Placeholder`, `Building`, `UserScore`, `CardWithScore`. El primero tiene un cuerpo y un pie en el que se espera que se introduzca cualquier contenido. En el segundo se espera que siga la mecánica de traspasar su contenido de un placeholder a otro. El tercero es un contenedor de placeholders con puntuaciones para cada contenido de placeholder, y es el que se encargará de renderizar el contenido en el placeholder correspondiente según su puntuación. `UserScore` es un `<span>` y dos `<button>` que representan una puntuación a la que se le puede dar like y dislike. Finalmente, `CardWithScore` devuelve una `Card` a la cual le pasa el componente `UserScore` y define props específicos de puntuación e índice dentro del edificio.
 
-```js
-const IndexPage = () => {
-  return (
-    <>
-      <PageBodyAdvanced>
-        <Building>
-          <Placeholder>
-            <Card></Card>
-          </Placeholder>
-
-          <Placeholder>
-            <Card></Card>
-          </Placeholder>
-
-          <Placeholder>
-            <Card></Card>
-          </Placeholder>
-
-          <Placeholder>
-            <Card></Card>
-          </Placeholder>
-
-          <Placeholder>
-            <Card></Card>
-          </Placeholder>
-
-          <Placeholder>
-            <Card></Card>
-          </Placeholder>
-        </Building>
-      </PageBodyAdvanced>
-    </>
-  )
-}
-```
-
-Con
+#### `Card`
 
 ```js
 const Card = ({footContent, children}) => {
@@ -470,6 +434,9 @@ const Card = ({footContent, children}) => {
   )
 }
 ```
+Define la estructura de una carta; parte principal y pie de carta.
+
+#### `Placeholder`
 
 ```js
 const Placeholder = ({children}) => {
@@ -481,141 +448,147 @@ const Placeholder = ({children}) => {
 }
 ```
 
+Es un simple div.
+
+#### `Building`
+
 ```js
-const Building = ({children}) => {
+// (...)
+
+import goods from '../../../content/bienes.json';
+
+const Building = ({amountOfPlaceholders = 0}) => {
+  const [allScore, setAllScore] =
+      React.useState(new Array(goods.bienes.length).fill(0));
+  const [allContent, setAllContent] =
+      React.useState(
+          goods.bienes
+              .map((bien) => {
+                  return (
+                      <>
+                        <h5>{bien.nombre}</h5>
+                        <p>{bien.antecedentes}</p>
+                        <p>Tipo: {bien.tipo.arquitectura}</p>
+                        <p>Época: {bien.tipo.época}</p>
+                        <p>Localización: {
+                              `lat ${bien.localizacion.lat}, long: ${bien.localizacion.long}`
+                            }
+                        </p>
+                      </>
+                    )
+                })
+          );
+
   return (
     <div className="placeholders">
-      {children}
+      {
+       allContent
+          .reduce((allPlaceholder, content, index) => {
+              if (allPlaceholder.length < amountOfPlaceholders) {
+                const sort = () => {
+                  const allCombined =
+                      allScore.map((score, index) => {
+                            return {
+                                score,
+                                element: allContent[index],
+                              }
+                          });
+                  const allSorted =
+                      [...allCombined.sort((a, b) => b.score - a.score)];
+                  setAllContent([...allSorted.map(_ => _.element)]);
+                  setAllScore([...allSorted.map(_ => _.score)]);
+                }
+                const increaseScore = (index) => {
+                  allScore[index]++;
+                  sort();
+                }
+                const decreaseScore = (index) => {
+                  if (allScore[index] >= 1) {
+                    allScore[index]--;
+                    sort();
+                  }
+                }
+                allPlaceholder.push((
+                    <Placeholder
+                        key={`placeholder-${allPlaceholder.length}`}>
+                      <CardWithScore
+                          onIncreaseScore={increaseScore}
+                          onDecreaseScore={decreaseScore}
+                          index={index}
+                          score={allScore[index]}>
+                        {content}
+                      </CardWithScore>
+                    </Placeholder>
+                  ));
+              }
+              return allPlaceholder;
+            }, [])
+      }
     </div>
   )
 }
 ```
 
-Se asignó el mismo `scss` que en la práctica anterior.
+Dos variables de estado `allScore` y `allContent` definen arrays para puntuaciones y para el contenido que estará en cada placeholder. Hay tantos como bienes estén en el archivo `bienes.json` importado. El primero se inicializa todo a 0, el segundo se inicializa a un componente JSX con varios `<span>` que describen el bien.
 
-## Modificación de `Building` hacia separación de contenido y placeholders
+El componente en si crea hasta `amountOfPlaceholders` placeholders. Cada uno contiene una carta con puntuación a la que se le pasan funciones `onIncreaseScore` y `onDecreaseScore` que son llamadas cuando el usuario presiona el botón de like o de dislike. Como cada contenido tiene asignado un index, se sabe qué contenido ha sido presionado y se actualiza el estado del componente `Building` acorde a ello.
 
-Dados N placeholders y un array de M contenidos de placeholder, se introducen en un placeholder los N primeros elementos del array de contenidos. En otras palabras; hay un orden de inserción a placeholders desde el array de contenido.
-
-Puedo introducir como hijos de `Building` contenido para placeholders:
+#### `CardWithScore`
 
 ```js
-  <Building amountOfPlaceholders={5}>
-    <Card><p>some card</p></Card>
-  </Building>
-```
-
-Sin embargo, primero se meten internamente cartas para cada bien, luego se introducen los hijos de `Building`. Es decir, las cartas de bien tienen prioridad sobre los hijos pasados a `Building` porque se introducen primero en el array interno de contenido.
-
-El código JSX del componente es el siguiente:
-
-```js
+const CardWithScore = ({footContent, children, onIncreaseScore, onDecreaseScore,
+    index, score = 0}) => {
   return (
-    <div className="placeholders">
-      {
-       allPlaceholderContent
-            .reduce((allPlaceholder, content) => {
-                  if (allPlaceholder.length < amountOfPlaceholders) {
-                    const KEY = `placeholder-${allPlaceholder.length}`;
-                    allPlaceholder.push((
-                          <Placeholder key={KEY}>{content}</Placeholder>
-                        ));
-                  }
-                  return allPlaceholder;
-                }, [])
-      }
-    </div>
+    <Card footContent={(
+          <>
+            <UserScore onIncreaseScore={() => onIncreaseScore(index)}
+                onDecreaseScore={() => onDecreaseScore(index)}
+                score={score}/>
+            {footContent}
+          </>
+        )}>
+      {children}
+    </Card>
   )
+}
 ```
 
-Aplica un `reduce` sobre el array de contenido para acumular un array de placeholders. Introduzco un `Placeholder` mientras no haya llegado a `amountOfPlaceholders`.
+La carta que contiene el sistema de puntuaciones y su contenido. Gestiona la puntuación pasándole la información adecuada al componente `UserScore`.
 
-Necesito que el array de contenido sea persistente por lo que uso un `useState()` para crear una variable de componente. Luego uso `useEffect` para inicializar ese array. `goods` es un json importado, `import goods from '../../../content/bienes.json';`.
-
-```js
-const Building = ({amountOfPlaceholders = 0, children}) => {
-  const [allPlaceholderContent, setPlaceholderContent] = React.useState([]);
-
-  React.useEffect(() => {
-        const withExtraContent = [
-              ...goods.bienes.map(bien => createCardFromGood(bien)),
-              ...React.Children.toArray(children)
-            ];
-        setPlaceholderContent(withExtraContent);
-      }, [children]); // empty array means only run this once per component mount
-
-  return (
-    // (...)
-```
-
-La función `createCardFromGood` devuelve un elemento JSX que representa la tarjeta:
+#### `UserScore`
 
 ```js
-const createCardFromGood = (good) => (
-  <Card>
-    <StaticImage src={good.img} alt={"Foto del bien cultural."}/>
-    <h2>{good.nombre}</h2>
-    <p>{good.antecedentes}</p>
-    <p>Tipo: {good.tipo.arquitectura}</p>
-    <p>Época: {good.tipo.época}</p>
-    <p>Localización: {`lat ${good.localizacion.lat}, long: ${good.localizacion.long}`}</p>
-  </Card>
-)
-```
-
-## Creación de un componente `UserScore`
-
-Con un texto `<span>` y dos botones de like y dislike se crea una variable `score` con `useState` que es modificada por eventos `onClick` del botón:
-
-```js
-const UserScore = () => {
-  const [score, setScore] = React.useState(0);
+const UserScore = ({score, onIncreaseScore, onDecreaseScore}) => {
   const likeButton = React.useRef(null);
   const dislikeButton = React.useRef(null);
   const scoreSpan = React.useRef(null);
 
-  // Lógica para activar, desactivar el botón y para actualizar el texto del
-  // elemento html <span>. Se ejecuta cada vez que se modifica score.
   React.useEffect(() => {
-    if (score < 1) {
-      //<ref>.current accede al contenido actual al que se refiere la referencia.
-      dislikeButton.current.disabled = true; 
-    } else {
-      dislikeButton.current.disabled = false;
-    }
+        if (score < 1) {
+          dislikeButton.current.disabled = true;
+        } else {
+          dislikeButton.current.disabled = false;
+        }
 
-    scoreSpan.current.textContent = `${score}`;
-  }, [score]);
-
-  const increaseScore = () => {
-    setScore(score + 1);
-  }
-  
-  const decreaseScore = () => {
-    if (score >= 1) {
-      setScore(score - 1);
-    }
-  }
+        scoreSpan.current.textContent = `${score}`;
+      }, [score]);
 
   return (
     <>
-      <span ref={scoreSpan}>0</span>
-      <button ref={likeButton} onClick={increaseScore}>Like</button>
-      <button ref={dislikeButton} onClick={decreaseScore}>Dislike</button>
+      <span ref={scoreSpan}>{score}</span>
+      <button ref={likeButton} onClick={onIncreaseScore}>Like</button>
+      <button ref={dislikeButton} onClick={onDecreaseScore}>Dislike</button>
     </>
   )
 }
 ```
 
-Se introdujo temporalmente en `Building` como hijo, dentro de un `Card`, para probarlo:
+Utiliza `useRef` para poder referenciar directamente los nodos DOM y define un `useEffect` para que cada vez que cambie el prop `score` se actualice el texto y el botón de dislike si llega a 0 su valor.
 
-```js
-    <Building amountOfPlaceholders={5}>
-      <Card><p>some card</p></Card>
-      <Card footContent={<UserScore></UserScore>}></Card>
-    </Building>
-```
+#### Resultado final
 
-![Estado actual de la página web](docs/after-userscore-state.png)
+![Página web final tras la inclusión del componente de edificio](./docs/pagina_final.png)
 
+Se puede presionar los distintos botones y el orden del contenido cambiará:
 
+![Página web final tras utilizar los botones de like y dislike](./docs/ordenamiento_por_puntuacion.png)
