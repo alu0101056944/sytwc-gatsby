@@ -30,29 +30,36 @@ const Building = ({amountOfPlaceholders = 0}) => {
                 })
           );
 
-  // const sort = () => {
-  //   setAllPlaceholderInfo(oldValue => {
-  //       return [...oldValue.sort((a, b) => b.count - a.count)];
-  //     });
-  // }
-
   return (
     <div className="placeholders">
       {
        allContent
           .reduce((allPlaceholder, content, index) => {
               if (allPlaceholder.length < amountOfPlaceholders) {
+                const sort = () => {
+                  const allCombined =
+                      allScore.map((score, index) => {
+                            return {
+                                score,
+                                element: allContent[index],
+                              }
+                          });
+                  const allSorted =
+                      [...allCombined.sort((a, b) => b.score - a.score)];
+                  console.log('sorted');
+                  console.log([...allSorted.map(_ => _.score)]);
+                  console.log([...allSorted.map(_ => _.element)]);
+                  setAllContent([...allSorted.map(_ => _.element)]);
+                  setAllScore([...allSorted.map(_ => _.score)]);
+                }
                 const increaseScore = (index) => {
                   allScore[index]++;
-                  setAllScore([...allScore]);
-                  console.log('increased score');
-                  // sort();
+                  sort();
                 }
                 const decreaseScore = (index) => {
                   if (allScore[index] >= 1) {
                     allScore[index]--;
-                    setAllScore([...allScore]);
-                    // sort();
+                    sort();
                   }
                 }
                 allPlaceholder.push((
