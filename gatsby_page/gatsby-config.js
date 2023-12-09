@@ -4,7 +4,7 @@
 module.exports = {
   siteMetadata: {
     title: `SYTWC Gatsby Assignment`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://www.yourdomain.tld`,
   },
   plugins: [
     "gatsby-plugin-sass",
@@ -13,8 +13,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'all page components',
-        path: `${__dirname}/src/pages`
+        name: 'goods_images',
+        path: `${__dirname}/src/images/bienes`
       }
     }
   ]
