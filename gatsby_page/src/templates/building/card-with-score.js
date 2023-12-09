@@ -6,13 +6,14 @@ import Card from './card';
 // in the parent's content array. It has an "element" property
 // referencing this component and another property "count"
 // for sorting the arrayElementWrapper in the content array.
-const CardWithScore = ({footContent, children, onScorePress,
-    arrayElementWrapper}) => {
+const CardWithScore = ({footContent, children, onIncreaseScore, onDecreaseScore,
+    index, score = 0}) => {
   return (
     <Card footContent={(
           <>
-            <UserScore onScorePress={onScorePress}
-                arrayElementWrapper={arrayElementWrapper}></UserScore>
+            <UserScore onIncreaseScore={() => onIncreaseScore(index)}
+                onDecreaseScore={() => onDecreaseScore(index)}
+                score={score}/>
             {footContent}
           </>
         )}>

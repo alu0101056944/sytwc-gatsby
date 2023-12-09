@@ -10,13 +10,12 @@ module.exports = {
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
-    // {
-    //   resolve: 'gatsby-source-filesystem',
-    //   options: {
-    //     name: 'bienes',
-    //     path: `${__dirname}/src/assets/goods/`,
-    //     ignore: [`**/*.!(json)`]
-    //   }
-    // }
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'goods_images',
+        path: `${__dirname}/src/images/bienes`
+      }
+    }
   ]
 };

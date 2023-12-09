@@ -6,64 +6,70 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 import goods from '../../../content/bienes.json';
 
-const Building = ({amountOfPlaceholders = 0, children}) => {
-  const [allPlaceholderInfo, setAllPlaceholderInfo] = React.useState([]);
+const Building = ({amountOfPlaceholders = 0}) => {
+  const [allScore, setAllScore] =
+      React.useState(new Array(goods.bienes.length).fill(0));
+  const [allContent, setAllContent] =
+      React.useState(
+          goods.bienes
+              .map((bien, index) => {
+                  return (
+                      <>
+                        <StaticImage src={`../images/bien${index + 1}.png`}
+                                  alt={"Foto del bien cultural."}/>
+                        <h5>{bien.nombre}</h5>
+                        <p>{bien.antecedentes}</p>
+                        <p>Tipo: {bien.tipo.arquitectura}</p>
+                        <p>Época: {bien.tipo.época}</p>
+                        <p>Localización: {
+                              `lat ${bien.localizacion.lat}, long: ${bien.localizacion.long}`
+                            }
+                        </p>
+                      </>
+                    )
+                })
+          );
 
-  // meant for allowing content to implement a score. Content receives this as
-  // a prop.
-  const notifyScoreChange = (newScore, arrayElementWrapper) => {
-    arrayElementWrapper.count = newScore;
-    setAllPlaceholderInfo(oldValue => {
-          console.log(oldValue.sort((a, b) => b.count - a.count));
-          return oldValue.sort((a, b) => b.count - a.count);
-        });
-  }
-
-  const createCardFromGood = (good, arrayElementWrapper) => (
-        <CardWithScore
-            onScorePress={notifyScoreChange}
-            arrayElementWrapper={arrayElementWrapper}>
-          <StaticImage src={good.img} alt={"Foto del bien cultural."}/>
-          <h5>{good.nombre}</h5>
-          <p>{good.antecedentes}</p>
-          <p>Tipo: {good.tipo.arquitectura}</p>
-          <p>Época: {good.tipo.época}</p>
-          <p>Localización: {
-                `lat ${good.localizacion.lat}, long: ${good.localizacion.long}`
-              }
-          </p>
-        </CardWithScore>
-      )
-
-  React.useEffect(() => {
-        setAllPlaceholderInfo([
-              ...goods.bienes
-                  .map((bien) => {
-                    const elementWrapper = {
-                      count: 0,
-                    }
-                    elementWrapper.element =
-                        createCardFromGood(bien, elementWrapper);
-                    return elementWrapper;
-                  }),
-              ...React.Children.toArray(children)
-                  .map(child => ({ count: 0, element: child }))
-            ]);
-      }, []);
+  // const sort = () => {
+  //   setAllPlaceholderInfo(oldValue => {
+  //       return [...oldValue.sort((a, b) => b.count - a.count)];
+  //     });
+  // }
 
   return (
     <div className="placeholders">
       {
-       allPlaceholderInfo
-            .reduce((allPlaceholder, info) => {
-                  if (allPlaceholder.length < amountOfPlaceholders) {
-                    const KEY = `placeholder-${allPlaceholder.length}`;
-                    allPlaceholder.push((
-                          <Placeholder key={KEY}>{info.element}</Placeholder>
-                        ));
+       allContent
+          .reduce((allPlaceholder, content, index) => {
+              if (allPlaceholder.length < amountOfPlaceholders) {
+                const increaseScore = (index) => {
+                  allScore[index]++;
+                  setAllScore([...allScore]);
+                  console.log('increased score');
+                  // sort();
+                }
+                const decreaseScore = (index) => {
+                  if (allScore[index] >= 1) {
+                    allScore[index]--;
+                    setAllScore([...allScore]);
+                    // sort();
                   }
-                  return allPlaceholder;
-                }, [])
+                }
+                allPlaceholder.push((
+                    <Placeholder
+                        key={`placeholder-${allPlaceholder.length}`}>
+                      <CardWithScore
+                          onIncreaseScore={increaseScore}
+                          onDecreaseScore={decreaseScore}
+                          index={index}
+                          score={allScore[index]}>
+                        {content}
+                      </CardWithScore>
+                    </Placeholder>
+                  ));
+              }
+              return allPlaceholder;
+            }, [])
       }
     </div>
   )
