@@ -8,6 +8,7 @@ Marcos Barrios, alu0101056944
   - [Haciendo un Layout con encabezado y zona principal](#haciendo-un-layout-con-encabezado-y-zona-principal)
   - [Creación del componente edificio](#creacion-del-componente-edificio)
   - [Modificación de `Building` hacia separación de contenido y placeholders](#modificación-de-building-hacia-separación-de-contenido-y-placeholders)
+  - [Obtención de datos desde API hacia nuevo componente `BuildingWithAPI`](#obtención-de-datos-desde-api-hacia-nuevo-componente-buildingwithapi)
 
 ## Tareas
 
@@ -592,3 +593,93 @@ Utiliza `useRef` para poder referenciar directamente los nodos DOM y define un `
 Se puede presionar los distintos botones y el orden del contenido cambiará:
 
 ![Página web final tras utilizar los botones de like y dislike](./docs/ordenamiento_por_puntuacion.png)
+
+### Obtención de datos desde API hacia nuevo componente `BuildingWithAPI`
+
+#### Desacoplar el contenido del componente `Building`
+
+En primer lugar se hacen cambios en `Building` para separar el contenido del componente. Para ello se introduce un prop `content` que representa el array de contenido que es pasado por una función `contentTransform` para transformar el contenido en un JSX. De esta forma el contenido se especifica al usar el componente:
+
+```js
+const IndexPage = () => {
+  // Función que recibe como argumento cada element del array de "content"
+  const contentTransform = (bien) => {
+      return (
+          <>
+            <h5>{bien.nombre}</h5>
+            <p>{bien.antecedentes}</p>
+            <p>Tipo: {bien.tipo.arquitectura}</p>
+            <p>Época: {bien.tipo.época}</p>
+            <p>Localización: {
+                  `lat ${bien.localizacion.lat}, long: ${bien.localizacion.long}`
+                }
+            </p>
+          </>
+        )
+      }
+  return (
+    <>
+      <PageBodyAdvanced>
+        <h3>Usos del componente edificio</h3>
+        <h4>Con datos obtenidos de archivo .json:</h4>
+        <Building amountOfPlaceholders={5} content={goods.bienes} // se le pasa tanto content como contentTransform
+            contentTransform={contentTransform}/>
+        <h4>Con datos de API</h4>
+        <BuildingWithAPI amountOfPlaceholders={10}></BuildingWithAPI>
+      </PageBodyAdvanced>
+    </>
+  )
+}
+```
+
+#### Crear el componente `BuildingWithAPI`
+
+Utilizando [https://jsonplaceholder.typicode.com/posts](https://jsonplaceholder.typicode.com/posts) como contenido, debe obtener el título y el body que tiene cada elemento en una consulta de graphql. `allRecords` viene de la configuración del plugin `gatsby-source-apiserver`.
+
+```js
+    // (gatsby-config.js)
+    {
+      resolve: 'gatsby-source-apiserver',
+      options: {
+        name: 'records',
+        url: 'https://jsonplaceholder.typicode.com/posts',
+        schemaType: apiContentSchema,
+        enableDevRefresh: true,
+      }
+    }
+```
+
+![Captura de pantalla donde se ve el formato de los archivos de entrada](docs/imagen_json.png)
+
+```js
+const BuildingWithAPI = ({amountOfPlaceholders = 0}) => {
+    const data = useStaticQuery(graphql`
+        query {
+          allRecords {
+            nodes {
+              title
+              body
+            }
+          }
+        }
+      `);
+
+  const contentTransform = (content) => {
+        return (
+          <>
+            <h5>{content.title}</h5>
+            <p>{content.body}</p>
+          </>
+        )
+      }
+
+  return (
+      <Building amountOfPlaceholders={amountOfPlaceholders}
+          contentTransform={contentTransform}
+          content={data.allRecords.nodes}/>
+    )
+}
+```
+
+![Captura de pantalla de la página tras poner el segundo componente edificio que hace la llamada a la API para amountOfPlaceholders=12](docs/aspecto%20final%20de%20la%20página.png)
+>>>>>>> develop
