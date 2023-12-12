@@ -11,10 +11,10 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: 'gastby-source-apiserver',
       options: {
-        name: 'goods_images',
-        path: `${__dirname}/src/images/bienes`
+        name: 'records',
+        url: 'https://jsonplaceholder.typicode.com/posts'
       }
     }
   ]

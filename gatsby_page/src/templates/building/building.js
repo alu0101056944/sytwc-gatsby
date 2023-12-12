@@ -3,25 +3,12 @@ import '../../styles/building/building.scss';
 import Placeholder from './placeholder';
 import CardWithScore from './card-with-score';
 
-const Building = ({amountOfPlaceholders = 0, goods = []}) => {
+const Building = ({amountOfPlaceholders = 0, content = [],
+      contentTransform = () => {}}) => {
   const [allScore, setAllScore] =
-      React.useState(new Array(goods.bienes.length).fill(0));
+      React.useState(new Array(content.length).fill(0));
   const [allContent, setAllContent] =
-        React.useState(goods.bienes.map((bien) => {
-            return (
-                <>
-                  <h5>{bien.nombre}</h5>
-                  <p>{bien.antecedentes}</p>
-                  <p>Tipo: {bien.tipo.arquitectura}</p>
-                  <p>Época: {bien.tipo.época}</p>
-                  <p>Localización: {
-                        `lat ${bien.localizacion.lat}, long: ${bien.localizacion.long}`
-                      }
-                  </p>
-                </>
-              )
-          })
-        );
+      React.useState(content.map(contentTransform));
 
   return (
     <div className="placeholders">
