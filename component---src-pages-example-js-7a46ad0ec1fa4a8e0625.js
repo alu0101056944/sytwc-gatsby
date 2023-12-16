@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksytwc_gatsby_assignment=self.webpackChunksytwc_gatsby_assignment||[]).push([[654],{642:function(e,t,n){n.r(t),n.d(t,{Head:function(){return s}});var a=n(7294),l=n(9018);const s=()=>a.createElement("title",null,"Página de ejemplo");t.default=()=>a.createElement(l.Z,null,a.createElement("p",null,"Example webpage."))}}]);
+//# sourceMappingURL=component---src-pages-example-js-7a46ad0ec1fa4a8e0625.js.map
