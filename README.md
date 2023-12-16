@@ -9,6 +9,7 @@ Marcos Barrios, alu0101056944
   - [Creación del componente edificio](#creacion-del-componente-edificio)
   - [Modificación de `Building` hacia separación de contenido y placeholders](#modificación-de-building-hacia-separación-de-contenido-y-placeholders)
   - [Obtención de datos desde API hacia nuevo componente `BuildingWithAPI`](#obtención-de-datos-desde-api-hacia-nuevo-componente-buildingwithapi)
+  - [Prueba de accesibilidad](#prueba-de-accesibilidad)
 
 ## Tareas
 
@@ -682,3 +683,122 @@ const BuildingWithAPI = ({amountOfPlaceholders = 0}) => {
 ```
 
 ![Captura de pantalla de la página tras poner el segundo componente edificio que hace la llamada a la API para amountOfPlaceholders=12](docs/aspecto%20final%20de%20la%20página.png)
+
+## Prueba de accesibilidad
+
+Teniendo en cuenta que el plugin `eslint-plugin-jsx-a11y` viene activo por defecto, se puede comprobar que gatsby no imprime ninguna advertencia de accesibilidad cuando se ejecuta con `npm run develop` desde `gastby_page/`:
+
+```bash
+> sytwc-gatsby-assignment@2.1.0 develop
+> gatsby develop
+
+
+ ERROR  UNKNOWN
+
+(node:18804) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland
+alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+
+ ERROR  UNKNOWN
+
+(node:2176) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative
+ instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+success compile gatsby files - 1.726s
+success load gatsby config - 0.026s
+success load plugins - 0.568s
+success onPreInit - 0.001s                                                                                      
+success initialize cache - 0.035s
+success copy gatsby files - 0.359s
+success Compiling Gatsby Functions - 0.353s
+success onPreBootstrap - 0.382s
+
+ ERROR  UNKNOWN
+
+(node:13476) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland
+alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+success createSchemaCustomization - 0.006s                                                                      
+
+ ERROR  UNKNOWN
+
+(node:15480) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland
+alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+ ERROR  UNKNOWN
+
+(node:19820) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland
+alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Plugin ApiServer warning enableDevRefresh only works with ENABLE_GATSBY_REFRESH_ENDPOINT enabled.
+Plugin ApiServer see https://www.gatsbyjs.org/docs/environment-variables/#reserved-environment-variables        
+success Clean up stale nodes - 0.024s - 108/0 0.00/s
+success Checking for changed pages - 0.001s                                                                     
+success source and transform nodes - 1.412s                                                                     
+success building schema - 0.136s
+success createPages - 0.004s
+
+ ERROR  UNKNOWN
+
+(node:20032) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland
+alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+success createPagesStatefully - 0.114s
+info Total nodes: 135, SitePage nodes: 6 (use --verbose for breakdown)
+success Checking for changed pages - 0.001s                                                                     
+success write out redirect data - 0.002s                                                                        
+success onPostBootstrap - 0.002s
+info bootstrap finished - 11.645s                                                                               
+success onPreExtractQueries - 0.002s                                                                            
+
+ ERROR  UNKNOWN
+
+(node:14032) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland
+alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+success extract queries from components - 0.911s
+success write out requires - 0.014s
+
+ ERROR  UNKNOWN
+
+(node:2492) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative
+ instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+ ERROR  UNKNOWN
+
+(node:18000) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland
+alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+warn `isModuleDeclaration` has been deprecated, please migrate to `isImportOrExportDeclaration`
+    at isModuleDeclaration (C:\Users\Marcos\Desktop\Cosas\Educacion\ULL\master_2023_2024\SyTW_cliente\sytwc-gats
+by\gatsby_page\node_modules\@babel\types\lib\validators\generated\index.js:2748:35)
+    at PluginPass.Program (C:\Users\Marcos\Desktop\Cosas\Educacion\ULL\master_2023_2024\SyTW_cliente\sytwc-gatsb
+y\gatsby_page\node_modules\babel-plugin-lodash\lib\index.js:102:44)
+⠀
+You can now view sytwc-gatsby-assignment in the browser.                                                        
+⠀
+  http://localhost:8000/
+⠀
+View GraphiQL, an in-browser IDE, to explore your site's data and schema
+⠀
+  http://localhost:8000/___graphql
+⠀
+Note that the development build is not optimized.
+To create a production build, use gatsby build
+⠀
+success Building development bundle - 4.623s
+```
+
+Y mediante el uso del tabulador se puede comprobar que es posible navegar hacia todos los elementos interactuables de la página web.

@@ -11,7 +11,7 @@ const IndexPage = () => {
   const contentTransform = (bien) => {
       return (
           <>
-            <h5>{bien.nombre}</h5>
+            <h3>{bien.nombre}</h3>
             <p>{bien.antecedentes}</p>
             <p>Tipo: {bien.tipo.arquitectura}</p>
             <p>Época: {bien.tipo.época}</p>
@@ -31,13 +31,13 @@ const IndexPage = () => {
             <div className="formdiv">
               <h3>Subscribirse al boletin</h3>
               <form>
-                <label className="row" for="name">Nombre</label>
+                <label className="row" htmlFor="name">Nombre</label>
                 <input className="row" type="text" id="name" name="name" required/>
         
-                <label className="row" for="email">Email</label>
+                <label className="row" htmlFor="email">Email</label>
                 <input className="row" type="email" id="email" name="email" required/>
         
-                <input className="row" type="button" value="Submit"/>
+                <input className="row" type="button" value="Submit" onClick={() => alert('called')}/>
               </form>
             </div>
           }>

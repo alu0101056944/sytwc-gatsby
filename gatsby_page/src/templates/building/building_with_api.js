@@ -19,7 +19,7 @@ const BuildingWithAPI = ({amountOfPlaceholders = 0}) => {
   const contentTransform = (content) => {
         return (
           <>
-            <h5>{content.title}</h5>
+            <h3>{content.title}</h3>
             <p>{content.body}</p>
           </>
         )
