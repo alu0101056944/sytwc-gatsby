@@ -1,11 +1,13 @@
 import * as React from 'react';
-import PageBody from '../../templates/structure/pagebody';
-import NavigationMenuWithLogo from '../navigation-menu-with-logo';
+
 import { StaticImage } from 'gatsby-plugin-image';
 
-const PageBodyAdvanced = ({children}) => {
+import NavAndMain from './nav-and-main';
+import NavigationMenuWithLogo from '../navigation-menu-with-logo';
+
+const NavAndMainWithMenu = ({children}) => {
   return (
-      <PageBody 
+      <NavAndMain 
         navigationMenus={
             [
               <NavigationMenuWithLogo
@@ -23,8 +25,8 @@ const PageBodyAdvanced = ({children}) => {
           }>
 
         {children}
-      </PageBody>
+      </NavAndMain>
   )
 }
 
-export default PageBodyAdvanced
+export default NavAndMainWithMenu

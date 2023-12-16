@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import PageBodyAdvanced from '../templates/structure/pagebody-advanced';
+import NavAndMainWithMenu from '../templates/structure/nav-and-main-with-menu';
 import Building from '../templates/building/building';
 import BuildingWithAPI from '../templates/building/building_with_api';
 import ContentAndSidebar from '../templates/structure/content-and-sidebar';
@@ -23,7 +23,7 @@ const IndexPage = () => {
         )
       }
   return (
-    <PageBodyAdvanced>
+    <NavAndMainWithMenu>
       <h1>Usos del componente edificio</h1>
       <ContentAndSidebar>
         <h2>Con datos obtenidos de archivo .json:</h2>
@@ -32,7 +32,7 @@ const IndexPage = () => {
       </ContentAndSidebar>
       <h2>Con datos de API</h2>
       <BuildingWithAPI amountOfPlaceholders={12}></BuildingWithAPI>
-    </PageBodyAdvanced>
+    </NavAndMainWithMenu>
   )
 }
 
