@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-import settings from  '../../settings.json' assert { type: 'json' }
+import settings from  '../../settings.json';
 
 test('has title', async ({ page }) => {
   if (!settings.url) {
