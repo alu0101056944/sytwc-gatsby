@@ -19,11 +19,21 @@ $listOfElementsToHighlightInForm: [button text email];
 
 .contentAndSidebar {
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  margin: 3px 3px 3px 3px;
 
   .content {
-    width: 800px;
-    margin: 3px, 3px, 3px, 3px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+    width: 682px;
+    margin: 3px 7px 3px 3px;
+    background-color: MediumOrchid;
   }
+
   .sidebar {
     display: flex;
     flex-wrap: wrap;
@@ -32,7 +42,7 @@ $listOfElementsToHighlightInForm: [button text email];
     align-content: center;
 
     width: 255px;
-    margin: 3px, 7px, 3px, 0px;
+    margin: 3px 7px 3px 0px;
     padding: 5px 10px 5px 10px;
 
     %common-sidebar {
@@ -43,10 +53,11 @@ $listOfElementsToHighlightInForm: [button text email];
 
     .formdiv {
       @extend %common-sidebar;
-      background-color: hotpink;
       display: flex;
       justify-content: flex-start;
       flex-direction: column;
+      background-color: hotpink;
+
       form {
         display: flex;
         flex-direction: column;

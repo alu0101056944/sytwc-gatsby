@@ -25,28 +25,32 @@ const IndexPage = () => {
   return (
     <NavAndMainWithMenu>
       <h1>Usos del componente edificio</h1>
-      <ContentAndSidebar
-            sidebarContent={
-              <div className="formdiv">
-                <h3>Subscribirse al boletin</h3>
-                <form>
-                  <label className="row" for="name">Nombre</label>
-                  <input className="row" type="text" id="name" name="name" required/>
-          
-                  <label className="row" for="email">Email</label>
-                  <input className="row" type="email" id="email" name="email" required/>
-          
-                  <input className="row" type="button" value="Submit"/>
-                </form>
-              </div>
-            }>
 
-        <h2>Con datos obtenidos de archivo .json:</h2>
+      <ContentAndSidebar
+          sidebarContent={
+            <div className="formdiv">
+              <h3>Subscribirse al boletin</h3>
+              <form>
+                <label className="row" for="name">Nombre</label>
+                <input className="row" type="text" id="name" name="name" required/>
+        
+                <label className="row" for="email">Email</label>
+                <input className="row" type="email" id="email" name="email" required/>
+        
+                <input className="row" type="button" value="Submit"/>
+              </form>
+            </div>
+          }>
+
+        <h2>Con datos obtenidos de archivo .json</h2>
         <Building amountOfPlaceholders={5} content={goods.bienes}
             contentTransform={contentTransform}/>
       </ContentAndSidebar>
-      <h2>Con datos de API</h2>
-      <BuildingWithAPI amountOfPlaceholders={12}></BuildingWithAPI>
+
+      <div className="feature">
+        <h2>Con datos de API</h2>
+        <BuildingWithAPI amountOfPlaceholders={12}></BuildingWithAPI>
+      </div>
     </NavAndMainWithMenu>
   )
 }
