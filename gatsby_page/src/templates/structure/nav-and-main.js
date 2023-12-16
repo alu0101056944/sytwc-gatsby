@@ -1,7 +1,7 @@
 import * as React from 'react';
-import '../styles/pagebody.scss'
+import '../../styles/structure/nav-and-main.scss'
 
-const PageBody = ({navigationMenus, children}) => {
+const NavAndMain = ({navigationMenus, children}) => {
   return (
     <>
       <nav>
@@ -14,4 +14,4 @@ const PageBody = ({navigationMenus, children}) => {
   )
 }
 
-export default PageBody
+export default NavAndMain

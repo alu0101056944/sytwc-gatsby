@@ -1,11 +1,12 @@
 import * as React from 'react';
-import PageBodyAdvanced from '../templates/pagebody-advanced';
+
+import NavAndMainWithMenu from '../templates/structure/nav-and-main-with-menu';
 
 const Example = () => {
   return (
-    <PageBodyAdvanced>
+    <NavAndMainWithMenu>
       <p>Example webpage.</p>
-    </PageBodyAdvanced>
+    </NavAndMainWithMenu>
   );
 }
 
