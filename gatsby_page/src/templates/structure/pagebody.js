@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../styles/pagebody.scss'
+import '../../styles/structure/pagebody.scss'
 
 const PageBody = ({navigationMenus, children}) => {
   return (

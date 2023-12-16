@@ -1,0 +1,23 @@
+
+.contentAndSidebar {
+  .content {
+    width: 495px;
+    margin: 3px, 3px, 3px, 3px;
+  }
+  .sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+
+    width: 255px;
+    margin: 3px, 7px, 3px, 0px;
+    padding: 5px 10px 5px 10px;
+    %common-sidebar {
+      width: 98%;
+      margin: 11px 6px 3px 6px;
+      padding: 3px 3px 3px 3px;
+    }
+  }
+}

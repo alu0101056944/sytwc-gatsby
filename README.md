@@ -384,7 +384,7 @@ Contenido de `./simple-navigation-menu.scss`:
 }
 ```
 
-#### `styles/pagebody.scss`
+#### `styles/structure/pagebody.scss`
 
 ```css
 @mixin setMarginAndPadding {

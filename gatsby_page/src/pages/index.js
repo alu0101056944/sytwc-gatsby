@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PageBodyAdvanced from '../templates/pagebody-advanced';
+import PageBodyAdvanced from '../templates/structure/pagebody-advanced';
 import Building from '../templates/building/building';
 
 import goods from '../../content/bienes.json';

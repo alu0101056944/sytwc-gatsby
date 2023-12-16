@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PageBody from '../templates/pagebody';
-import NavigationMenuWithLogo from '../templates/navigation-menu-with-logo';
+import PageBody from '../../templates/structure/pagebody';
+import NavigationMenuWithLogo from '../navigation-menu-with-logo';
 import { StaticImage } from 'gatsby-plugin-image';
 
 const PageBodyAdvanced = ({children}) => {
@@ -10,7 +10,7 @@ const PageBodyAdvanced = ({children}) => {
             [
               <NavigationMenuWithLogo
                 key={`navigation1`}
-                logoImage={<StaticImage src="../images/icon.png" alt="The logo of the webpage"/>}
+                logoImage={<StaticImage src="../../images/icon.png" alt="The logo of the webpage"/>}
                 links={
                   [
                     { to: '/', text: 'Página principal' },

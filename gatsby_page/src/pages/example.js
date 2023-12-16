@@ -1,5 +1,5 @@
 import * as React from 'react';
-import PageBodyAdvanced from '../templates/pagebody-advanced';
+import PageBodyAdvanced from '../templates/structure/pagebody-advanced';
 
 const Example = () => {
   return (
