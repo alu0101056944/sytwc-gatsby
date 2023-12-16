@@ -1,7 +1,27 @@
 
+@mixin addHoverEffectsOnElements($listOfElements) {
+  @each $element in $listOfElements {
+    @if $element == button {
+      input[type="button"]:hover {
+        background-color: lightgray;
+        border-radius: 4px;
+        border: 2px solid darkgray;
+      }
+    } @else {
+      input[type="#{$element}"]:hover {
+        background-color: lightgray;
+      }
+    }
+  }
+}
+
+$listOfElementsToHighlightInForm: [button text email];
+
 .contentAndSidebar {
+  display: flex;
+
   .content {
-    width: 495px;
+    width: 800px;
     margin: 3px, 3px, 3px, 3px;
   }
   .sidebar {
@@ -14,10 +34,34 @@
     width: 255px;
     margin: 3px, 7px, 3px, 0px;
     padding: 5px 10px 5px 10px;
+
     %common-sidebar {
-      width: 98%;
+      width: 100%;
       margin: 11px 6px 3px 6px;
       padding: 3px 3px 3px 3px;
+    }
+
+    .formdiv {
+      @extend %common-sidebar;
+      background-color: hotpink;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        .row {
+          margin: 5px 5px 5px 5px;
+          padding: 3px 0 3px 0;
+        }
+        input[type="button"] {
+          width: 25%;
+          align-self: center;
+        }
+        @include addHoverEffectsOnElements($listOfElementsToHighlightInForm);
+      }
     }
   }
 }

@@ -1,6 +1,8 @@
 import * as React from 'react';
-import Building from './building';
+
 import { useStaticQuery, graphql } from 'gatsby';
+
+import Building from './building';
 
 const BuildingWithAPI = ({amountOfPlaceholders = 0}) => {
   const data = useStaticQuery(graphql`
