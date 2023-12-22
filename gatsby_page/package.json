@@ -14,7 +14,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "deploy": "npm run build && gh-pages -d public",
-    "test": "playwright test --headed --project firefox",
+    "test": "playwright test --project firefox",
     "testwithui": "playwright test --ui --project firefox"
   },
   "dependencies": {

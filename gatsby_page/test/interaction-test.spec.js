@@ -34,34 +34,96 @@ test.describe('Tab navigation', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button').filter({ hasText: /Like/ }).nth(0))
-          .toBeFocused();
-    await new Promise(resolve => setTimeout(resolve, 3000));
+        .toBeFocused();
 
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button').filter({ hasText: /Dislike/ }).nth(0))
-          .toBeFocused();
+        .toBeFocused();
 
-    await new Promise(resolve => setTimeout(resolve, 3000));
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button').filter({ hasText: /Like/ }).nth(1))
-          .toBeFocused();
+        .toBeFocused();
 
-    await new Promise(resolve => setTimeout(resolve, 3000));
     await page.keyboard.press('Tab');
-    await new Promise(resolve => setTimeout(resolve, 3000));
     await expect(page.getByRole('button').filter({ hasText: /Dislike/ }).nth(1))
-          .toBeFocused();
+        .toBeFocused();
 
-    await new Promise(resolve => setTimeout(resolve, 3000));
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button').filter({ hasText: /Like/ }).nth(2))
-          .toBeFocused();
+        .toBeFocused();
 
-    await new Promise(resolve => setTimeout(resolve, 3000));
     await page.keyboard.press('Tab');
     await expect(page.getByRole('button').filter({ hasText: /Dislike/ }).nth(2))
-          .toBeFocused();
+        .toBeFocused();
+  });
+
+  test('Can focus all initial scrollable cards', async ({ page }) => {
+    await page.waitForLoadState();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.card-main').nth(0)).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.card-main').nth(1)).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.card-main').nth(2)).toBeFocused();
+  });
+
+  test('Can reach the form', async ({ page }) => {
+    await page.waitForLoadState();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await expect(page.locator('input[type="text"]')).toBeFocused();
+    
+    await page.keyboard.press('Tab');
+    await expect(page.locator('input[type="email"]')).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('button').filter({ hasText: /Submit/ }))
+        .toBeFocused();
+  });
+
+  test('Can reach second building component', async ({ page }) => {
+    await page.waitForLoadState();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.card-main').nth(3)).toBeFocused();
   });
 });
