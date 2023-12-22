@@ -7,6 +7,7 @@ test.beforeEach(async ({ page }) => {
   if (!settings.url) {
     throw new Error('Webpage URL has not been specified in settings.json');
   }
+  page.setDefaultTimeout(30000);
   await page.goto(settings.url);
 });
 
