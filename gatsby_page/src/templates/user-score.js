@@ -1,6 +1,7 @@
 import * as React from 'react';
 import '../styles/user-score.scss';
 
+
 // index and onScorePress are used to allow the parent
 // to sort any component that has this component.
 const UserScore = ({score, onIncreaseScore, onDecreaseScore}) => {
