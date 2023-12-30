@@ -1,4 +1,4 @@
-# SYTWC Sass Theory
+# SYTWC Gatsby
 
 Marcos Barrios, alu0101056944
 
